@@ -25,5 +25,21 @@
       }
     },
   ],
-  "java.test.defaultConfig": "WPIlibUnitTests"
+  "java.test.defaultConfig": "WPIlibUnitTests",
+  "java.format.settings.url": "./Runnymede.Formatter.xml",
+  "java.format.settings.profile": "Runnymede",
+  "java.saveActions.organizeImports": true,
+  "java.cleanup.actionsOnSave": [
+    "addOverride"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "[java]": {
+  	"editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+  },
+  "git.allowForcePush": true,
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*{1,2}|^\\s*\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)"
 }
