@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.intakeConstants;
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCommand extends Command {
@@ -17,10 +17,11 @@ public class IntakeCommand extends Command {
     @Override
     public void execute() { 
     //If the button specified in the constants is pressed, begin the intake motor.  
-        if (joystick.getRawButtonPressed(intakeConstants.intakeButton)) {
+        if (joystick.getRawButtonPressed(IntakeConstants.INTAKE_BUTTON)) {
             m_IntakeSubsystem.intake();  
         }  
-        if (joystick.getRawButtonReleased(intakeConstants.intakeButton)) {
+        // Add an else to stop
+        if (joystick.getRawButtonReleased(IntakeConstants.INTAKE_BUTTON)) {
             m_IntakeSubsystem.stop();
         }
 

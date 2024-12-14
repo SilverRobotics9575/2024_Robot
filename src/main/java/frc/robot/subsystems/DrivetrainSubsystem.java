@@ -9,39 +9,41 @@ import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.DriverConstants;
 
 public class DrivetrainSubsystem extends SubsystemBase{
+  /** Creates a new DrivetrainSubsystem. */
 
-
-  private final CANSparkMax rightUpMotor, rightDownMotor, leftUpMotor, leftDownMotor;
+  private final CANSparkMax rightFrontMotor, rightBackMotor, leftFrontMotor, leftBackMotor;
 
   private DifferentialDrive differentialDrive = null; 
 
   public DrivetrainSubsystem() {
-    rightUpMotor = new CANSparkMax(Constants.driverConstants.rightUpDeviceID, MotorType.kBrushed);
-    rightDownMotor = new CANSparkMax(Constants.driverConstants.rightDownDeviceID, MotorType.kBrushed);
-    leftUpMotor = new CANSparkMax(Constants.driverConstants.leftUpDeviceID, MotorType.kBrushed);
-    leftDownMotor = new CANSparkMax(Constants.driverConstants.leftDownDeviceID, MotorType.kBrushed);
+    rightFrontMotor = new CANSparkMax(DriverConstants.RIGHT_FRONT_DEVICE_ID, MotorType.kBrushed);
+    rightBackMotor = new CANSparkMax(DriverConstants.RIGHT_BACK_DEVICE_ID, MotorType.kBrushed);
+    leftFrontMotor = new CANSparkMax(DriverConstants.LEFT_FRONT_DEVICE_ID, MotorType.kBrushed);
+    leftBackMotor = new CANSparkMax(DriverConstants.LEFT_BACK_DEVICE_ID, MotorType.kBrushed);
 
-    rightDownMotor.follow(rightUpMotor);
-    leftDownMotor.follow(leftUpMotor);
+    rightBackMotor.follow(rightFrontMotor);
+    leftBackMotor.follow(leftFrontMotor);
     
-    differentialDrive = new DifferentialDrive(leftUpMotor, rightUpMotor);
+    differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
 
-    rightUpMotor.restoreFactoryDefaults();
-    leftUpMotor.restoreFactoryDefaults();
-    rightDownMotor.restoreFactoryDefaults();
-    leftDownMotor.restoreFactoryDefaults();
+    // TODO: Test if restoreFactoryDefaults is necessary
+    rightFrontMotor.restoreFactoryDefaults();
+    leftFrontMotor.restoreFactoryDefaults();
+    rightBackMotor.restoreFactoryDefaults();
+    leftBackMotor.restoreFactoryDefaults();
   }
 
-  public void DriveCommand(double moveSpeed, double rotateSpeed) {
+  public void drive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
  @Override
   public void periodic() {
     // This method will be called once per scheduler run
 
+    // Safety code and dashboard updates go here
     }
 
   public void stop() {
