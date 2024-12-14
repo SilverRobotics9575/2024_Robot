@@ -13,29 +13,30 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimberConstants;
 
 public class ClimberSubsystem extends SubsystemBase {
-  /** Creates a new ClimberSubsystem. */
-  // Both motors are different motorcontrollers, so they are delcared seperately
-  private final VictorSP leftClimber;
-  private final CANSparkMax rightClimber;
+    /** Creates a new ClimberSubsystem. */
+    // Both motors are different motorcontrollers, so they are delcared seperately
+    private final VictorSP    leftClimber;
+    private final CANSparkMax rightClimber;
 
-  public ClimberSubsystem() {
-    leftClimber = new VictorSP(ClimberConstants.LEFT_CLIMBER_DEVICE_ID);
-    rightClimber = new CANSparkMax(ClimberConstants.RIGHT_CLIMBER_DEVICE_ID,  MotorType.kBrushed);
+    public ClimberSubsystem() {
+        leftClimber  = new VictorSP(ClimberConstants.LEFT_CLIMBER_DEVICE_ID);
+        rightClimber = new CANSparkMax(ClimberConstants.RIGHT_CLIMBER_DEVICE_ID, MotorType.kBrushed);
 
-    rightClimber.restoreFactoryDefaults();
-  }
+        rightClimber.restoreFactoryDefaults();
+    }
 
-  public void climb() {
-    rightClimber.set(ClimberConstants.CLIMBER_SPEED);
-    leftClimber.set(ClimberConstants.CLIMBER_SPEED);
-  }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    public void climb() {
+        rightClimber.set(ClimberConstants.CLIMBER_SPEED);
+        leftClimber.set(ClimberConstants.CLIMBER_SPEED);
+    }
 
-  public void stop(){
-    rightClimber.set(0);
-    leftClimber.set(0);
-  }
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
+
+    public void stop() {
+        rightClimber.set(0);
+        leftClimber.set(0);
+    }
 }

@@ -10,40 +10,41 @@ import frc.robot.Constants.DriverConstants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class DriveCommand extends Command {
-  /** Creates a new DriveCommand. */
-  private final Joystick joystick;
-  private final DrivetrainSubsystem m_drivetrainSubsystem;
-  
-  // The commands constructor
-  public DriveCommand(DrivetrainSubsystem drivetrainSubsystem, Joystick controller) {
-    joystick = controller;
-    m_drivetrainSubsystem = drivetrainSubsystem;
-    addRequirements(drivetrainSubsystem);
-  }
+    /** Creates a new DriveCommand. */
+    private final Joystick            joystick;
+    private final DrivetrainSubsystem m_drivetrainSubsystem;
+
+    // The commands constructor
+    public DriveCommand(DrivetrainSubsystem drivetrainSubsystem, Joystick controller) {
+        joystick              = controller;
+        m_drivetrainSubsystem = drivetrainSubsystem;
+        addRequirements(drivetrainSubsystem);
+    }
 
 // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    // The default command has started
-  }
+    @Override
+    public void initialize() {
+        // The default command has started
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    double moveSpeed = joystick.getRawAxis(DriverConstants.AXIS_X);
-    double rotateSpeed = joystick.getRawAxis(DriverConstants.AXIS_Y);
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        double moveSpeed   = joystick.getRawAxis(DriverConstants.AXIS_X);
+        double rotateSpeed = joystick.getRawAxis(DriverConstants.AXIS_Y);
 
-    m_drivetrainSubsystem.drive(moveSpeed, rotateSpeed);
-  }
+        m_drivetrainSubsystem.drive(moveSpeed, rotateSpeed);
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-   m_drivetrainSubsystem.stop();
-  }
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        m_drivetrainSubsystem.stop();
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

@@ -10,33 +10,35 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private final CANSparkMax shooterUpMotor, shooterDownMotor;
+    private final CANSparkMax shooterUpMotor, shooterDownMotor;
 
-  public ShooterSubsystem() {
-    shooterUpMotor = new CANSparkMax(ShooterConstants.SHOOTER_TOP_DEVICE_ID, MotorType.kBrushed);
-    shooterDownMotor = new CANSparkMax(ShooterConstants.SHOOTER_BOTTOM_DEVICE_ID, MotorType.kBrushed);
+    public ShooterSubsystem() {
+        shooterUpMotor   = new CANSparkMax(ShooterConstants.SHOOTER_TOP_DEVICE_ID, MotorType.kBrushed);
+        shooterDownMotor = new CANSparkMax(ShooterConstants.SHOOTER_BOTTOM_DEVICE_ID, MotorType.kBrushed);
 
 
-    shooterUpMotor.restoreFactoryDefaults();
-    shooterDownMotor.restoreFactoryDefaults();
-  }
+        shooterUpMotor.restoreFactoryDefaults();
+        shooterDownMotor.restoreFactoryDefaults();
+    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
 
-  }
-  // Hold button to run top motor
-  public void waitSeconds(){
-    shooterUpMotor.set(-ShooterConstants.SHOOTER_SPEED);
-  }
-  // Release button to run bottom motor and send note
-  public void shoot(){
-    shooterDownMotor.set(-ShooterConstants.SHOOTER_SPEED);
-  }
+    }
 
-  public void stop() {
-    shooterUpMotor.set(0);
-    shooterDownMotor.set(0);
-  }
+    // Hold button to run top motor
+    public void waitSeconds() {
+        shooterUpMotor.set(-ShooterConstants.SHOOTER_SPEED);
+    }
+
+    // Release button to run bottom motor and send note
+    public void shoot() {
+        shooterDownMotor.set(-ShooterConstants.SHOOTER_SPEED);
+    }
+
+    public void stop() {
+        shooterUpMotor.set(0);
+        shooterDownMotor.set(0);
+    }
 }
