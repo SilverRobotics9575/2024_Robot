@@ -26,13 +26,14 @@
     },
   ],
   "java.test.defaultConfig": "WPIlibUnitTests",
-  "java.format.settings.url": "./Runnymede.Formatter.xml",
-  "java.format.settings.profile": "Runnymede",
+  "java.format.settings.url": "./SilverRobotics.Formatter.xml",
+  "java.format.settings.profile": "SilverRobotics",
   "java.saveActions.organizeImports": true,
   "java.cleanup.actionsOnSave": [
     "addOverride"
   ],
   "editor.codeActionsOnSave": {
+
     "source.organizeImports": "explicit"
   },
   "[java]": {

@@ -12,6 +12,7 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 public class DriveCommand extends Command {
     /** Creates a new DriveCommand. */
     private final Joystick            joystick;
+    // FIXME Hungarian Notation
     private final DrivetrainSubsystem m_drivetrainSubsystem;
 
     // The commands constructor
@@ -21,7 +22,7 @@ public class DriveCommand extends Command {
         addRequirements(drivetrainSubsystem);
     }
 
-// Called when the command is initially scheduled.
+    // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         // The default command has started

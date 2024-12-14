@@ -17,7 +17,8 @@ public class ClimberCommand extends Command {
     /** Creates a new ClimberCommand. */
     public ClimberCommand(ClimberSubsystem climberSubsystem, Joystick controller) {
         // Use addRequirements() here to declare subsystem dependencies.
-        joystick           = controller;
+        joystick = controller;
+        // FIXME Hungarian notation
         m_climberSubsystem = climberSubsystem;
     }
 
@@ -35,7 +36,8 @@ public class ClimberCommand extends Command {
             System.out.println("Climbing"); // Test to see if climbing is working
         }
         // Climber will stop if the button 3 is released
-        // TODO: Add a way for the robot to automatically know when max climber height is released
+        // TODO: Add a way for the robot to automatically know when max climber height
+        // is released
         if (joystick.getRawButtonReleased(ClimberConstants.CLIMBER_BUTTON)) {
             m_climberSubsystem.stop();
         }

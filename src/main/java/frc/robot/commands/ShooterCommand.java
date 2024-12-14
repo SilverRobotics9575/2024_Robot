@@ -12,6 +12,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterCommand extends Command {
     /** Creates a new ShooterCommand */
     private final Joystick         joystick;
+    // FIXME Hungarian Notation
     private final ShooterSubsystem m_shooterSubsystem;
 
     // The commands constructor
@@ -24,10 +25,12 @@ public class ShooterCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        // If the 5th button is pressed the shooter will prepare by speeding up the top motor
+        // If the 5th button is pressed the shooter will prepare by speeding up the top
+        // motor
         if (joystick.getRawButton(ShooterConstants.SHOOT_BUTTON1)) {
             m_shooterSubsystem.waitSeconds();
-            // If the 5th button is being pressed and the 6th button is clicked then the shooter
+            // If the 5th button is being pressed and the 6th button is clicked then the
+            // shooter
             // will shoot
         }
         if (joystick.getRawButton(ShooterConstants.SHOOT_BUTTON1)
