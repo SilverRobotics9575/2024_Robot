@@ -23,6 +23,7 @@ package frc.robot;
  * TODO: Make the class name start with an uppercasse letter
  */
 public final class Constants {
+
     public static final class OperatorConstants {
         public static final int    controllerPort                 = 0;
 
@@ -31,7 +32,10 @@ public final class Constants {
     }
 
     public static final class AutoConstants {
-        // Input auto constants
+
+        public static enum AutoPattern {
+            DO_NOTHING, DRIVE_FORWARD, OTHER_AUTO
+        };
     }
 
     public static final class DriverConstants {

@@ -1,8 +1,11 @@
 package frc.robot.operator;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.AutoConstants.AutoPattern;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.CancelCommand;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -18,21 +21,45 @@ import frc.robot.subsystems.ShooterSubsystem;
  */
 public class OperatorInput extends SubsystemBase {
 
-    private final Joystick driverJoystick = new Joystick(OperatorConstants.controllerPort);
-
+    // Define all user devices here...
     // TODO: Change the Joystick to use the GameController class.
-//    private final GameController driverController = new GameController(
-//        OperatorConstants.DRIVER_CONTROLLER_PORT,
-//        OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND);
+    private final Joystick driverJoystick = new Joystick(OperatorConstants.controllerPort);
+//  private final GameController driverController = new GameController(
+//      OperatorConstants.DRIVER_CONTROLLER_PORT,
+//      OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND);
+
+    // Define all Dashboard choosers here...
+    private final SendableChooser<AutoPattern> autoPatternChooser = new SendableChooser<>();
+
+    public OperatorInput() {
+
+        // Initialize all of the Dashboard choosers
+        autoPatternChooser.setDefaultOption("Do Nothing", AutoPattern.DO_NOTHING);
+        SmartDashboard.putData("Auto Pattern", autoPatternChooser);
+        autoPatternChooser.addOption("Drive Forward", AutoPattern.DRIVE_FORWARD);
+    }
 
     /*
-     * Map all functions to buttons.
+     * Get the selected auto pattern from the dashboard widget
+     */
+    public AutoPattern getAutoPattern() {
+
+        AutoPattern autoPattern = autoPatternChooser.getSelected();
+
+        if (autoPattern == null) {
+            return AutoPattern.DO_NOTHING;
+        }
+
+        return autoPattern;
+    }
+
+    /*
+     * Map any functions used in default commands to buttons or joysticks here.
      *
      * A function should be a description of the robot behavior it is triggering.
      *
      * This separation of concerns allows for remapping of the robot functions to different
-     * controller buttons without the need to change the command or the trigger. The mapping
-     * from controller button to function is done in the following methods.
+     * controller buttons without the need to change the command or the trigger.
      */
 
     // Cancel all commands when the driver presses the XBox controller three lines (aka. start)
@@ -43,7 +70,8 @@ public class OperatorInput extends SubsystemBase {
     }
 
     /**
-     * Use this method to define your robotFunction -> command mappings.
+     * Use this method to define your button->command mappings. for any commands that are not the
+     * default command.
      *
      * NOTE: all subsystems should be passed into this method.
      */
@@ -52,7 +80,9 @@ public class OperatorInput extends SubsystemBase {
 
         // Cancel all commands when the driver presses the XBox controller three lines (aka. start)
         // button
-        // FIXME: The cancel command should stop ALL subsystems
+        // FIXME: The cancel command should stop ALL subsystems, so all subsystems should be passed
+        // to the
+        // CancelCommand
         new Trigger(() -> isCancel())
             .onTrue(new CancelCommand(this, drivetrainSubsystem));
 
@@ -68,7 +98,9 @@ public class OperatorInput extends SubsystemBase {
 
     /**
      * Accessor to get the game controller for backwards compatibility
-     * FIXME: remove and replace where used with OperatorInput getter methods.
+     * FIXME: remove and replace where necessary/used with OperatorInput getter methods.
+     * No commands should directly access the Joystick. This allows remapping of controller
+     * buttons without searching the entire code base to look for button conficts.
      *
      * @return GameController
      */
