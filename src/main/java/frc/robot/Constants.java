@@ -24,7 +24,10 @@ package frc.robot;
  */
 public final class Constants {
     public static final class OperatorConstants {
-        public static final int controllerPort = 0;
+        public static final int    controllerPort                 = 0;
+
+        public static final int    DRIVER_CONTROLLER_PORT         = 0;
+        public static final double GAME_CONTROLLER_STICK_DEADBAND = .2;
     }
 
     public static final class AutoConstants {
@@ -49,7 +52,7 @@ public final class Constants {
         // Suggestion INTAKE_MOTOR_CAN_ID
         public static final int    INTAKE_DEVICE_ID = 8;
         public static final double INTAKE_SPEED     = 0.15; // WHATEVER YOU DO, DO NOT SET THIS TO
-                                                            // 1!!!
+        // 1!!!
         public static final int    INTAKE_BUTTON    = 2;    // PLACEHOLDER VALUE
     }
 

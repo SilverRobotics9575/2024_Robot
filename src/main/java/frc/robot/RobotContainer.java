@@ -5,8 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-// Automatically from template
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -14,6 +12,7 @@ import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.operator.OperatorInput;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -31,28 +30,33 @@ import frc.robot.subsystems.ShooterSubsystem;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
+    private final OperatorInput       oi               = new OperatorInput();
+
     // TODO Rename the drivetrain to be consistent drivetrainSubsystem
     private final DrivetrainSubsystem drivetrain       = new DrivetrainSubsystem();
     private final ShooterSubsystem    shooterSubsystem = new ShooterSubsystem();
     private final IntakeSubsystem     intakeSubsystem  = new IntakeSubsystem();
     private final ClimberSubsystem    climberSubsystem = new ClimberSubsystem();
-    public Joystick                   driverController = new Joystick(Constants.OperatorConstants.controllerPort);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
+
+        // TODO: Rename the default commands DefaultDriveCommand or DriveDeaultCommand
+        // to distinguish the default commands from the other (non-default) commands
+
+        // TODO: pass the operator input (oi) as the first parameter in all default commands
+
+        // Set default commands on subsystems
+        drivetrain.setDefaultCommand(new DriveCommand(drivetrain, oi.getDriverController()));
+        shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, oi.getDriverController()));
+        intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, oi.getDriverController()));
+        climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, oi.getDriverController()));
+
         // Configure the button bindings
         configureButtonBindings();
 
-        // Set default commands on subsystems
-        // TODO: Rename the default commands DefaultDriveCommand or DriveDeaultCommand
-        // to distinguish
-        // the default commands from the other (non-default) commands
-        drivetrain.setDefaultCommand(new DriveCommand(drivetrain, driverController));
-        shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, driverController));
-        intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, driverController));
-        climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, driverController));
     }
 
     /**
@@ -64,6 +68,11 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        oi.configureButtonBindings(
+            drivetrain,
+            intakeSubsystem,
+            shooterSubsystem,
+            climberSubsystem);
     }
 
     /**
