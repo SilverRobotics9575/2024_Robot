@@ -8,30 +8,30 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class IntakeCommand extends Command {
     private final Joystick        joystick;
     // FIXME Hungarian Notation
-    private final IntakeSubsystem m_IntakeSubsystem;
+    private final IntakeSubsystem intakeSubsystem;
 
-    public IntakeCommand(IntakeSubsystem IntakeSubsystem, Joystick controller) {
+    public IntakeCommand(IntakeSubsystem intakeSubsystem, Joystick controller) {
         joystick          = controller;
-        m_IntakeSubsystem = IntakeSubsystem;
-        addRequirements(m_IntakeSubsystem);
+        this.intakeSubsystem = intakeSubsystem;
+        addRequirements(intakeSubsystem);
     }
 
     @Override
     public void execute() {
         // If the button specified in the constants is pressed, begin the intake motor.
         if (joystick.getRawButtonPressed(IntakeConstants.INTAKE_BUTTON)) {
-            m_IntakeSubsystem.intake();
+            intakeSubsystem.intake();
         }
         // Add an else to stop
         if (joystick.getRawButtonReleased(IntakeConstants.INTAKE_BUTTON)) {
-            m_IntakeSubsystem.stop();
+            intakeSubsystem.stop();
         }
 
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_IntakeSubsystem.stop();
+        intakeSubsystem.stop();
     }
 
     @Override

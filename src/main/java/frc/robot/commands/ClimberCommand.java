@@ -12,14 +12,13 @@ import frc.robot.subsystems.ClimberSubsystem;
 public class ClimberCommand extends Command {
 
     private final Joystick         joystick;
-    private final ClimberSubsystem m_climberSubsystem;
+    private final ClimberSubsystem climberSubsystem;
 
     /** Creates a new ClimberCommand. */
     public ClimberCommand(ClimberSubsystem climberSubsystem, Joystick controller) {
         // Use addRequirements() here to declare subsystem dependencies.
         joystick = controller;
-        // FIXME Hungarian notation
-        m_climberSubsystem = climberSubsystem;
+        this.climberSubsystem = climberSubsystem;
     }
 
     // Called when the command is initially scheduled.
@@ -32,14 +31,14 @@ public class ClimberCommand extends Command {
     public void execute() {
         // Climber button climbs while button 3 is being held
         if (joystick.getRawButton(ClimberConstants.CLIMBER_BUTTON)) {
-            m_climberSubsystem.climb();
+            climberSubsystem.climb();
             System.out.println("Climbing"); // Test to see if climbing is working
         }
         // Climber will stop if the button 3 is released
         // TODO: Add a way for the robot to automatically know when max climber height
         // is released
         if (joystick.getRawButtonReleased(ClimberConstants.CLIMBER_BUTTON)) {
-            m_climberSubsystem.stop();
+            climberSubsystem.stop();
         }
     }
 

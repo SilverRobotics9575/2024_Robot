@@ -13,12 +13,12 @@ public class ShooterCommand extends Command {
     /** Creates a new ShooterCommand */
     private final Joystick         joystick;
     // FIXME Hungarian Notation
-    private final ShooterSubsystem m_shooterSubsystem;
+    private final ShooterSubsystem shooterSubsystem;
 
     // The commands constructor
     public ShooterCommand(ShooterSubsystem shooterSubsystem, Joystick controller) {
         joystick           = controller;
-        m_shooterSubsystem = shooterSubsystem;
+        this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
     }
 
@@ -28,20 +28,20 @@ public class ShooterCommand extends Command {
         // If the 5th button is pressed the shooter will prepare by speeding up the top
         // motor
         if (joystick.getRawButton(ShooterConstants.SHOOT_BUTTON1)) {
-            m_shooterSubsystem.waitSeconds();
+            shooterSubsystem.waitSeconds();
             // If the 5th button is being pressed and the 6th button is clicked then the
             // shooter
             // will shoot
         }
         if (joystick.getRawButton(ShooterConstants.SHOOT_BUTTON1)
             && joystick.getRawButtonPressed(ShooterConstants.SHOOT_BUTTON2)) {
-            m_shooterSubsystem.shoot();
+            shooterSubsystem.shoot();
         }
         // If both buttons are released the shooter will stop
         if (joystick.getRawButtonReleased(ShooterConstants.SHOOT_BUTTON1)
             || joystick.getRawButtonReleased(ShooterConstants.SHOOT_BUTTON1)
                 && joystick.getRawButtonReleased(ShooterConstants.SHOOT_BUTTON2)) {
-            m_shooterSubsystem.stop();
+            shooterSubsystem.stop();
         }
 
     }
@@ -49,7 +49,7 @@ public class ShooterCommand extends Command {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooterSubsystem.stop();
+        shooterSubsystem.stop();
     }
 
     // Returns true when the command should end.

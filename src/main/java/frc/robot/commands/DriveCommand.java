@@ -13,12 +13,12 @@ public class DriveCommand extends Command {
     /** Creates a new DriveCommand. */
     private final Joystick            joystick;
     // FIXME Hungarian Notation
-    private final DrivetrainSubsystem m_drivetrainSubsystem;
+    private final DrivetrainSubsystem drivetrainSubsystem;
 
     // The commands constructor
     public DriveCommand(DrivetrainSubsystem drivetrainSubsystem, Joystick controller) {
         joystick              = controller;
-        m_drivetrainSubsystem = drivetrainSubsystem;
+        this.drivetrainSubsystem = drivetrainSubsystem;
         addRequirements(drivetrainSubsystem);
     }
 
@@ -34,13 +34,13 @@ public class DriveCommand extends Command {
         double moveSpeed   = joystick.getRawAxis(DriverConstants.AXIS_X);
         double rotateSpeed = joystick.getRawAxis(DriverConstants.AXIS_Y);
 
-        m_drivetrainSubsystem.drive(moveSpeed, rotateSpeed);
+        drivetrainSubsystem.drive(moveSpeed, rotateSpeed);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_drivetrainSubsystem.stop();
+        drivetrainSubsystem.stop();
     }
 
     // Returns true when the command should end.
