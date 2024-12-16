@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.ClimberCommand;
@@ -34,8 +32,8 @@ public class RobotContainer {
 
     // TODO Rename the drivetrain to be consistent drivetrainSubsystem
     private final DrivetrainSubsystem drivetrain       = new DrivetrainSubsystem();
-    private final ShooterSubsystem    shooterSubsystem = new ShooterSubsystem();
     private final IntakeSubsystem     intakeSubsystem  = new IntakeSubsystem();
+    private final ShooterSubsystem    shooterSubsystem = new ShooterSubsystem();
     private final ClimberSubsystem    climberSubsystem = new ClimberSubsystem();
 
     /**
@@ -50,24 +48,11 @@ public class RobotContainer {
 
         // Set default commands on subsystems
         drivetrain.setDefaultCommand(new DriveCommand(drivetrain, oi.getDriverController()));
-        shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, oi.getDriverController()));
         intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, oi.getDriverController()));
+        shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, oi.getDriverController()));
         climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, oi.getDriverController()));
 
         // Configure the button bindings
-        configureButtonBindings();
-
-    }
-
-    /**
-     * Use this method to define your button->command mappings. Buttons can be
-     * created by
-     * instantiating a {@link GenericHID} or one of its subclasses ({@link
-     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
-     * it to a
-     * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-     */
-    private void configureButtonBindings() {
         oi.configureButtonBindings(
             drivetrain,
             intakeSubsystem,
