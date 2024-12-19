@@ -23,10 +23,10 @@ public class OperatorInput extends SubsystemBase {
 
     // Define all user devices here...
     // TODO: Change the Joystick to use the GameController class.
-    private final Joystick driverJoystick = new Joystick(OperatorConstants.controllerPort);
-//  private final GameController driverController = new GameController(
-//      OperatorConstants.DRIVER_CONTROLLER_PORT,
-//      OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND);
+    private final Joystick                     driverJoystick     = new Joystick(OperatorConstants.controllerPort);
+    // private final GameController driverController = new GameController(
+    // OperatorConstants.DRIVER_CONTROLLER_PORT,
+    // OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND);
 
     // Define all Dashboard choosers here...
     private final SendableChooser<AutoPattern> autoPatternChooser = new SendableChooser<>();
@@ -66,7 +66,7 @@ public class OperatorInput extends SubsystemBase {
     // button
     public boolean isCancel() {
         return false;
-//        return driverController.getStartButton();
+        // return driverController.getStartButton();
     }
 
     /**
@@ -84,7 +84,7 @@ public class OperatorInput extends SubsystemBase {
         // to the
         // CancelCommand
         new Trigger(() -> isCancel())
-            .onTrue(new CancelCommand(this, drivetrainSubsystem));
+            .onTrue(new CancelCommand(this, drivetrainSubsystem, intakeSubsystem, shooterSubsystem, climberSubsystem));
 
     }
 
@@ -93,7 +93,7 @@ public class OperatorInput extends SubsystemBase {
 
         // Display any operator input values on the smart dashboard.
 
-//        SmartDashboard.putString("Driver Controller", driverController.toString());
+        // SmartDashboard.putString("Driver Controller", driverController.toString());
     }
 
     /**
