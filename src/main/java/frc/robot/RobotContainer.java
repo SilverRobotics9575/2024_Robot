@@ -30,8 +30,7 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final OperatorInput       oi               = new OperatorInput();
 
-    // TODO Rename the drivetrain to be consistent drivetrainSubsystem
-    private final DrivetrainSubsystem drivetrain       = new DrivetrainSubsystem();
+    private final DrivetrainSubsystem drivetrainSubsystem       = new DrivetrainSubsystem();
     private final IntakeSubsystem     intakeSubsystem  = new IntakeSubsystem();
     private final ShooterSubsystem    shooterSubsystem = new ShooterSubsystem();
     private final ClimberSubsystem    climberSubsystem = new ClimberSubsystem();
@@ -48,14 +47,14 @@ public class RobotContainer {
         // TODO: move the button getters to functions in the operator input.
 
         // Set default commands on subsystems
-        drivetrain.setDefaultCommand(new DefaultDriveCommand(drivetrain, oi.getDriverController()));
+        drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(drivetrainSubsystem, oi.getDriverController()));
         intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(oi, intakeSubsystem));
         shooterSubsystem.setDefaultCommand(new DefaultShooterCommand(shooterSubsystem, oi.getDriverController()));
         climberSubsystem.setDefaultCommand(new DefaultClimberCommand(climberSubsystem, oi.getDriverController()));
 
         // Configure the button bindings
         oi.configureButtonBindings(
-            drivetrain,
+            drivetrainSubsystem,
             intakeSubsystem,
             shooterSubsystem,
             climberSubsystem);
@@ -68,6 +67,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         return new AutonomousCommand(oi,
-            drivetrain, intakeSubsystem, shooterSubsystem, climberSubsystem);
+            drivetrainSubsystem, intakeSubsystem, shooterSubsystem, climberSubsystem);
     }
 }
