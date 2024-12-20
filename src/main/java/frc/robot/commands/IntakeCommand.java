@@ -1,17 +1,16 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCommand extends Command {
-    private final Joystick        joystick;
-    // FIXME Hungarian Notation
+    private final XboxController  joystick;
     private final IntakeSubsystem intakeSubsystem;
 
-    public IntakeCommand(IntakeSubsystem intakeSubsystem, Joystick controller) {
-        joystick          = controller;
+    public IntakeCommand(IntakeSubsystem intakeSubsystem, XboxController controller) {
+        joystick             = controller;
         this.intakeSubsystem = intakeSubsystem;
         addRequirements(intakeSubsystem);
     }

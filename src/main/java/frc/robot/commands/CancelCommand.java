@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import frc.robot.operator.OperatorInput;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
@@ -8,7 +7,7 @@ import frc.robot.subsystems.DrivetrainSubsystem;
  * This command is used to safely stop the robot in its current position, and to cancel any running
  * commands
  */
-public class CancelCommand extends LoggingCommand { 
+public class CancelCommand extends LoggingCommand {
 
     private final OperatorInput       operatorInput;
     private final DrivetrainSubsystem drivetrainSubsystem;

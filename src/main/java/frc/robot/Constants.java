@@ -78,6 +78,6 @@ public final class Constants {
         public static final int    SHOOT_BUTTON1            = 5;
         public static final int    SHOOT_BUTTON2            = 6;
 
-        public static final double SHOOTER_SPEED            = 1.00;
+        public static final double MAX_SHOOTER_SPEED        = 1.00;
     }
 }

@@ -10,15 +10,43 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private final CANSparkMax shooterUpMotor, shooterDownMotor;
+    private final CANSparkMax topShooterMotor, bottomShooterMotor;
 
     public ShooterSubsystem() {
-        shooterUpMotor   = new CANSparkMax(ShooterConstants.SHOOTER_TOP_DEVICE_ID, MotorType.kBrushed);
-        shooterDownMotor = new CANSparkMax(ShooterConstants.SHOOTER_BOTTOM_DEVICE_ID, MotorType.kBrushed);
+        topShooterMotor    = new CANSparkMax(ShooterConstants.SHOOTER_TOP_DEVICE_ID, MotorType.kBrushed);
+        bottomShooterMotor = new CANSparkMax(ShooterConstants.SHOOTER_BOTTOM_DEVICE_ID, MotorType.kBrushed);
 
 
-        shooterUpMotor.restoreFactoryDefaults();
-        shooterDownMotor.restoreFactoryDefaults();
+        topShooterMotor.restoreFactoryDefaults();
+        bottomShooterMotor.restoreFactoryDefaults();
+    }
+
+    public void setTopMotorSpeed(double shooterSpeed) {
+        // Call this method to update the top motors speed
+
+        shooterSpeed = verifySpeedValue(shooterSpeed);
+        topShooterMotor.set(shooterSpeed);
+    }
+
+    public void setBottomMotorSpeed(double speedValue) {
+        // Call this method to update the bottom motors speed
+
+        speedValue = verifySpeedValue(speedValue);
+        bottomShooterMotor.set(speedValue);
+    }
+
+    public double verifySpeedValue(double speedValue) {
+        // This method clamps speedValue between 1 and 0 to stay within PWM outputs
+
+        if (speedValue > 1) {
+            System.out.println("Warning: speedValue is greater than the max speed! Clamping to 1.");
+            speedValue = 1;
+        }
+        else if (speedValue < 0) {
+            System.out.println("Warning: speedValue is less than the min speed! Clamping to 0.");
+            speedValue = 0;
+        }
+        return speedValue;
     }
 
     @Override
@@ -29,16 +57,16 @@ public class ShooterSubsystem extends SubsystemBase {
 
     // Hold button to run top motor
     public void waitSeconds() {
-        shooterUpMotor.set(-ShooterConstants.SHOOTER_SPEED);
+        topShooterMotor.set(-ShooterConstants.MAX_SHOOTER_SPEED);
     }
 
     // Release button to run bottom motor and send note
     public void shoot() {
-        shooterDownMotor.set(-ShooterConstants.SHOOTER_SPEED);
+        bottomShooterMotor.set(-ShooterConstants.MAX_SHOOTER_SPEED);
     }
 
     public void stop() {
-        shooterUpMotor.set(0);
-        shooterDownMotor.set(0);
+        topShooterMotor.set(0);
+        bottomShooterMotor.set(0);
     }
 }

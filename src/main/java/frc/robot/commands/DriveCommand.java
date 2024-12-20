@@ -4,20 +4,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriverConstants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class DriveCommand extends Command {
     /** Creates a new DriveCommand. */
-    private final Joystick            joystick;
-    // FIXME Hungarian Notation
+    private final XboxController      joystick;
     private final DrivetrainSubsystem drivetrainSubsystem;
 
     // The commands constructor
-    public DriveCommand(DrivetrainSubsystem drivetrainSubsystem, Joystick controller) {
-        joystick              = controller;
+    public DriveCommand(DrivetrainSubsystem drivetrainSubsystem, XboxController controller) {
+        joystick                 = controller;
         this.drivetrainSubsystem = drivetrainSubsystem;
         addRequirements(drivetrainSubsystem);
     }

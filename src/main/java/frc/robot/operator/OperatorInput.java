@@ -1,6 +1,6 @@
 package frc.robot.operator;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.AutoConstants.AutoPattern;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.CancelCommand;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -23,10 +24,10 @@ public class OperatorInput extends SubsystemBase {
 
     // Define all user devices here...
     // TODO: Change the Joystick to use the GameController class.
-    private final Joystick driverJoystick = new Joystick(OperatorConstants.controllerPort);
-//  private final GameController driverController = new GameController(
-//      OperatorConstants.DRIVER_CONTROLLER_PORT,
-//      OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND);
+    private final XboxController               driverJoystick     = new XboxController(OperatorConstants.controllerPort);
+    // private final GameController driverController = new GameController(
+    // OperatorConstants.DRIVER_CONTROLLER_PORT,
+    // OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND);
 
     // Define all Dashboard choosers here...
     private final SendableChooser<AutoPattern> autoPatternChooser = new SendableChooser<>();
@@ -66,7 +67,7 @@ public class OperatorInput extends SubsystemBase {
     // button
     public boolean isCancel() {
         return false;
-//        return driverController.getStartButton();
+        // return driverController.getStartButton();
     }
 
     /**
@@ -86,6 +87,10 @@ public class OperatorInput extends SubsystemBase {
         new Trigger(() -> isCancel())
             .onTrue(new CancelCommand(this, drivetrainSubsystem));
 
+        new Trigger(() -> driverJoystick.getRightBumper())
+            .onTrue(new ShooterCommand(shooterSubsystem));
+
+
     }
 
     @Override
@@ -93,7 +98,7 @@ public class OperatorInput extends SubsystemBase {
 
         // Display any operator input values on the smart dashboard.
 
-//        SmartDashboard.putString("Driver Controller", driverController.toString());
+        // SmartDashboard.putString("Driver Controller", driverController.toString());
     }
 
     /**
@@ -105,7 +110,7 @@ public class OperatorInput extends SubsystemBase {
      * @return GameController
      */
     @Deprecated
-    public Joystick getDriverController() {
+    public XboxController getDriverController() {
         return driverJoystick;
     }
 
