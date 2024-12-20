@@ -21,8 +21,8 @@ public class ShootCommand extends LoggingCommand {
 
     // The commands constructor
     public ShootCommand(ShooterSubsystem shooterSubsystem) {
-        this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
+        this.shooterSubsystem = shooterSubsystem;
     }
 
     // Initial code that runs once when the command is called

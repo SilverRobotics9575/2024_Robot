@@ -16,9 +16,9 @@ public class DefaultDriveCommand extends Command {
 
     // The commands constructor
     public DefaultDriveCommand(DrivetrainSubsystem drivetrainSubsystem, XboxController controller) {
+        addRequirements(drivetrainSubsystem);
         joystick                 = controller;
         this.drivetrainSubsystem = drivetrainSubsystem;
-        addRequirements(drivetrainSubsystem);
     }
 
     // Called when the command is initially scheduled.

@@ -16,7 +16,7 @@ public class DefaultClimberCommand extends Command {
 
     /** Creates a new ClimberCommand. */
     public DefaultClimberCommand(ClimberSubsystem climberSubsystem, XboxController controller) {
-        // Use addRequirements() here to declare subsystem dependencies.
+        addRequirements(climberSubsystem);
         joystick              = controller;
         this.climberSubsystem = climberSubsystem;
     }

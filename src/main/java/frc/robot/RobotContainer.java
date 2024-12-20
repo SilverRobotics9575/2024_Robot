@@ -40,8 +40,6 @@ public class RobotContainer {
      */
     public RobotContainer() {
 
-        // TODO: Rename the default commands DefaultDriveCommand or DriveDeaultCommand
-        // to distinguish the default commands from the other (non-default) commands
 
         // TODO: pass the operator input (oi) as the first parameter in all default commands
         // TODO: move the button getters to functions in the operator input.
