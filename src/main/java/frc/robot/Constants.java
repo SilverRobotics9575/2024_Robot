@@ -57,7 +57,9 @@ public final class Constants {
         public static final int    INTAKE_DEVICE_ID = 8;
         public static final double INTAKE_SPEED     = 0.15; // WHATEVER YOU DO, DO NOT SET THIS TO
         // 1!
-        public static final double MAX_INTAKE       = 0.3;
+        public static final double MAX_INTAKE_SPEED = 0.3;
+        // TODO: Remove this code - all button mappings are hard coded in the OperatorInput class
+        @Deprecated
         public static final int    INTAKE_BUTTON    = 2;    // PLACEHOLDER VALUE
     }
 

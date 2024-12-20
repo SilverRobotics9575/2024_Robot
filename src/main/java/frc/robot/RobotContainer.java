@@ -45,10 +45,11 @@ public class RobotContainer {
         // to distinguish the default commands from the other (non-default) commands
 
         // TODO: pass the operator input (oi) as the first parameter in all default commands
+        // TODO: move the button getters to functions in the operator input.
 
         // Set default commands on subsystems
         drivetrain.setDefaultCommand(new DefaultDriveCommand(drivetrain, oi.getDriverController()));
-        intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(intakeSubsystem, oi.getDriverController()));
+        intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(oi, intakeSubsystem));
         shooterSubsystem.setDefaultCommand(new DefaultShooterCommand(shooterSubsystem, oi.getDriverController()));
         climberSubsystem.setDefaultCommand(new DefaultClimberCommand(climberSubsystem, oi.getDriverController()));
 

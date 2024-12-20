@@ -23,11 +23,12 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class OperatorInput extends SubsystemBase {
 
     // Define all user devices here...
-    // TODO: Change the Joystick to use the GameController class.
-    private final XboxController               driverJoystick     = new XboxController(OperatorConstants.controllerPort);
-    // private final GameController driverController = new GameController(
-    // OperatorConstants.DRIVER_CONTROLLER_PORT,
-    // OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND);
+    // TODO: Change the driverController to use the GameController class.
+    // NOTE: Care is required because the Y axis is normalized (not inverted) in the GameController.
+    // XBox buttons are numbered as: A=1, B=2, X=3, Y=4, but use the button getters instead of the
+    // raw button numbers
+
+    private final XboxController               driverController   = new XboxController(OperatorConstants.controllerPort);
 
     // Define all Dashboard choosers here...
     private final SendableChooser<AutoPattern> autoPatternChooser = new SendableChooser<>();
@@ -41,6 +42,8 @@ public class OperatorInput extends SubsystemBase {
     }
 
     /*
+     * AUTO Pattern
+     *
      * Get the selected auto pattern from the dashboard widget
      */
     public AutoPattern getAutoPattern() {
@@ -55,19 +58,29 @@ public class OperatorInput extends SubsystemBase {
     }
 
     /*
-     * Map any functions used in default commands to buttons or joysticks here.
+     * DEFAULT COMMANDS
      *
-     * A function should be a description of the robot behavior it is triggering.
+     * Add any buttons required for the default commands. Use a function name instead
+     * of a button name.
      *
      * This separation of concerns allows for remapping of the robot functions to different
-     * controller buttons without the need to change the command or the trigger.
+     * controller buttons without the need to change the default command.
      */
 
+    /*
+     * Cancel Command
+     */
     // Cancel all commands when the driver presses the XBox controller three lines (aka. start)
     // button
     public boolean isCancel() {
-        return false;
-        // return driverController.getStartButton();
+        return driverController.getStartButton();
+    }
+
+    /*
+     * Default Intake Command
+     */
+    public boolean runIntake() {
+        return driverController.getBButton();
     }
 
     /**
@@ -87,7 +100,7 @@ public class OperatorInput extends SubsystemBase {
         new Trigger(() -> isCancel())
             .onTrue(new CancelCommand(this, drivetrainSubsystem, intakeSubsystem, shooterSubsystem, climberSubsystem));
 
-        new Trigger(() -> driverJoystick.getRightBumper())
+        new Trigger(() -> driverController.getRightBumper())
             .onTrue(new ShootCommand(shooterSubsystem));
 
 
@@ -111,7 +124,7 @@ public class OperatorInput extends SubsystemBase {
      */
     @Deprecated
     public XboxController getDriverController() {
-        return driverJoystick;
+        return driverController;
     }
 
 }

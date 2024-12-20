@@ -1,36 +1,43 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.operator.OperatorInput;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class DefaultIntakeCommand extends Command {
-    private final XboxController  joystick;
+public class DefaultIntakeCommand extends LoggingCommand {
+
+    private final OperatorInput   oi;
     private final IntakeSubsystem intakeSubsystem;
 
-    public DefaultIntakeCommand(IntakeSubsystem intakeSubsystem, XboxController controller) {
-        joystick             = controller;
+    public DefaultIntakeCommand(OperatorInput oi, IntakeSubsystem intakeSubsystem) {
+
+        this.oi              = oi;
         this.intakeSubsystem = intakeSubsystem;
+
         addRequirements(intakeSubsystem);
     }
 
     @Override
+    public void initialize() {
+        logCommandStart();
+    }
+
+    @Override
     public void execute() {
+
         // If the button specified in the constants is pressed, begin the intake motor.
-        if (joystick.getRawButtonPressed(IntakeConstants.INTAKE_BUTTON)) {
-            intakeSubsystem.intake();
+        if (oi.runIntake()) {
+            intakeSubsystem.setIntakeSpeed(IntakeConstants.INTAKE_SPEED);
         }
-        // Add an else to stop
-        if (joystick.getRawButtonReleased(IntakeConstants.INTAKE_BUTTON)) {
+        else {
             intakeSubsystem.stop();
         }
-
     }
 
     @Override
     public void end(boolean interrupted) {
         intakeSubsystem.stop();
+        logCommandEnd(interrupted);
     }
 
     @Override
