@@ -1,7 +1,10 @@
 package frc.robot.commands;
 
 import frc.robot.operator.OperatorInput;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * This command is used to safely stop the robot in its current position, and to cancel any running
@@ -11,6 +14,9 @@ public class CancelCommand extends LoggingCommand {
 
     private final OperatorInput       operatorInput;
     private final DrivetrainSubsystem drivetrainSubsystem;
+    private final IntakeSubsystem     intakeSubsystem;
+    private final ShooterSubsystem    shooterSubsystem;
+    private final ClimberSubsystem    climberSubsystem;
 
     /**
      * Cancel the commands running on all subsystems.
@@ -18,12 +24,16 @@ public class CancelCommand extends LoggingCommand {
      * All subsystems must be passed to this command, and each subsystem should have a stop command
      * that safely stops the robot from moving.
      */
-    public CancelCommand(OperatorInput operatorInput, DrivetrainSubsystem drivetrainSubsystem) {
+    public CancelCommand(OperatorInput operatorInput, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsystem,
+        ShooterSubsystem shooterSubsystem, ClimberSubsystem climberSubsystem) {
 
         this.operatorInput       = operatorInput;
         this.drivetrainSubsystem = drivetrainSubsystem;
+        this.intakeSubsystem     = intakeSubsystem;
+        this.shooterSubsystem    = shooterSubsystem;
+        this.climberSubsystem    = climberSubsystem;
 
-        addRequirements(drivetrainSubsystem);
+        addRequirements(drivetrainSubsystem, intakeSubsystem, shooterSubsystem, climberSubsystem);
     }
 
     @Override
@@ -73,5 +83,8 @@ public class CancelCommand extends LoggingCommand {
 
         // Stop all of the robot movement
         drivetrainSubsystem.stop();
+        intakeSubsystem.stop();
+        shooterSubsystem.stop();
+        climberSubsystem.stop();
     }
 }

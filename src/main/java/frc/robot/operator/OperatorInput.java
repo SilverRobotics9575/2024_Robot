@@ -85,7 +85,7 @@ public class OperatorInput extends SubsystemBase {
         // to the
         // CancelCommand
         new Trigger(() -> isCancel())
-            .onTrue(new CancelCommand(this, drivetrainSubsystem));
+            .onTrue(new CancelCommand(this, drivetrainSubsystem, intakeSubsystem, shooterSubsystem, climberSubsystem));
 
         new Trigger(() -> driverJoystick.getRightBumper())
             .onTrue(new ShootCommand(shooterSubsystem));

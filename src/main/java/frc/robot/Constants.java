@@ -56,7 +56,8 @@ public final class Constants {
         // Suggestion INTAKE_MOTOR_CAN_ID
         public static final int    INTAKE_DEVICE_ID = 8;
         public static final double INTAKE_SPEED     = 0.15; // WHATEVER YOU DO, DO NOT SET THIS TO
-        // 1!!!
+        // 1!
+        public static final double MAX_INTAKE       = 0.3;
         public static final int    INTAKE_BUTTON    = 2;    // PLACEHOLDER VALUE
     }
 
