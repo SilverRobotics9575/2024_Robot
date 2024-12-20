@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterCommand extends Command {
+public class DefaultShooterCommand extends Command {
     /** Creates a new ShooterCommand */
     private final XboxController   joystick;
     // FIXME Hungarian Notation
     private final ShooterSubsystem shooterSubsystem;
 
     // The commands constructor
-    public ShooterCommand(ShooterSubsystem shooterSubsystem, XboxController controller) {
+    public DefaultShooterCommand(ShooterSubsystem shooterSubsystem, XboxController controller) {
         joystick              = controller;
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);

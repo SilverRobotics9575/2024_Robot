@@ -6,10 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.ClimberCommand;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.DefaultClimberCommand;
+import frc.robot.commands.DefaultDriveCommand;
+import frc.robot.commands.DefaultIntakeCommand;
+import frc.robot.commands.DefaultShooterCommand;
 import frc.robot.operator.OperatorInput;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -47,10 +47,10 @@ public class RobotContainer {
         // TODO: pass the operator input (oi) as the first parameter in all default commands
 
         // Set default commands on subsystems
-        drivetrain.setDefaultCommand(new DriveCommand(drivetrain, oi.getDriverController()));
-        intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, oi.getDriverController()));
-        shooterSubsystem.setDefaultCommand(new ShooterCommand(shooterSubsystem, oi.getDriverController()));
-        climberSubsystem.setDefaultCommand(new ClimberCommand(climberSubsystem, oi.getDriverController()));
+        drivetrain.setDefaultCommand(new DefaultDriveCommand(drivetrain, oi.getDriverController()));
+        intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(intakeSubsystem, oi.getDriverController()));
+        shooterSubsystem.setDefaultCommand(new DefaultShooterCommand(shooterSubsystem, oi.getDriverController()));
+        climberSubsystem.setDefaultCommand(new DefaultClimberCommand(climberSubsystem, oi.getDriverController()));
 
         // Configure the button bindings
         oi.configureButtonBindings(

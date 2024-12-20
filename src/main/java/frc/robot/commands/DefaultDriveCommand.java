@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriverConstants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class DriveCommand extends Command {
+public class DefaultDriveCommand extends Command {
     /** Creates a new DriveCommand. */
     private final XboxController      joystick;
     private final DrivetrainSubsystem drivetrainSubsystem;
 
     // The commands constructor
-    public DriveCommand(DrivetrainSubsystem drivetrainSubsystem, XboxController controller) {
+    public DefaultDriveCommand(DrivetrainSubsystem drivetrainSubsystem, XboxController controller) {
         joystick                 = controller;
         this.drivetrainSubsystem = drivetrainSubsystem;
         addRequirements(drivetrainSubsystem);
