@@ -12,7 +12,6 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class DefaultShooterCommand extends Command {
     /** Creates a new ShooterCommand */
     private final XboxController   joystick;
-    // FIXME Hungarian Notation
     private final ShooterSubsystem shooterSubsystem;
 
     // The commands constructor

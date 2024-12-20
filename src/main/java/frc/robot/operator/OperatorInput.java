@@ -28,7 +28,7 @@ public class OperatorInput extends SubsystemBase {
     // XBox buttons are numbered as: A=1, B=2, X=3, Y=4, but use the button getters instead of the
     // raw button numbers
 
-    private final XboxController               driverController   = new XboxController(OperatorConstants.controllerPort);
+    private final XboxController               driverController   = new XboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
 
     // Define all Dashboard choosers here...
     private final SendableChooser<AutoPattern> autoPatternChooser = new SendableChooser<>();
