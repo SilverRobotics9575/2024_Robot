@@ -4,15 +4,15 @@
 
 package frc.robot.commands;
 
-// FIXME: Extend the LoggingCommand and implement logging - see DefaultIntakeCommand
-
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
+// FIXME: Extend the LoggingCommand and implement logging - see DefaultIntakeCommand
+
 
 /** Creates a new ShooterCommand */
-public class ShootCommand extends Command {
+// TODO: Test command on robot before making default shooter command
+public class ShootCommand extends LoggingCommand {
 
     private final ShooterSubsystem shooterSubsystem;
 
@@ -30,6 +30,8 @@ public class ShootCommand extends Command {
     public void initialize() {
         shooterSubsystem.setTopMotorSpeed(ShooterConstants.MAX_SHOOTER_SPEED);
         startTime = System.currentTimeMillis();
+        
+        logCommandStart();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -49,6 +51,7 @@ public class ShootCommand extends Command {
     @Override
     public void end(boolean interrupted) {
         shooterSubsystem.stop();
+        log("Shooter command ended.");
     }
 
     // Returns true when the command should end.
@@ -58,6 +61,7 @@ public class ShootCommand extends Command {
 
         if (currentTime - startTime >= 1000) {
             System.out.println("Shooter command ended.");
+            // Not sure how to use this method
             return true;
         }
         else {
