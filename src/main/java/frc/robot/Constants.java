@@ -18,10 +18,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 
-/*
- * TODO: Make all constant start with an uppercase letter
- * TODO: Make the class name start with an uppercasse letter
- */
+
 public final class Constants {
 
     public static final class OperatorConstants {
@@ -70,11 +67,9 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        // TODO Suggestion:
-        // SHOOTER_MOTOR_CAN_ID
-        // FEEDER_MOTOR_CAN_ID
-        public static final int    SHOOTER_TOP_DEVICE_ID    = 5;
-        public static final int    SHOOTER_BOTTOM_DEVICE_ID = 6;
+        
+        public static final int    SHOOTER_MOTOR_CAN_ID   = 5;
+        public static final int    FEEDER_MOTOR_CAN_ID = 6;
         public static final double WAIT_TIME                = 1;
         public static final int    SHOOT_BUTTON1            = 5;
         public static final int    SHOOT_BUTTON2            = 6;

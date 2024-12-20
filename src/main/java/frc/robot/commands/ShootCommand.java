@@ -7,7 +7,7 @@ package frc.robot.commands;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
-// FIXME: Extend the LoggingCommand and implement logging - see DefaultIntakeCommand
+
 
 
 /** Creates a new ShooterCommand */
