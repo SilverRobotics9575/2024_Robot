@@ -4,12 +4,16 @@
 
 package frc.robot.commands;
 
+// FIXME: Extend the LoggingCommand and implement logging - see DefaultIntakeCommand
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
+
+/** Creates a new ShooterCommand */
 public class ShootCommand extends Command {
-    /** Creates a new ShooterCommand */
+
     private final ShooterSubsystem shooterSubsystem;
 
     private long                   startTime;
