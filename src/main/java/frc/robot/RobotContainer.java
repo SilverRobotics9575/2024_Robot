@@ -45,7 +45,7 @@ public class RobotContainer {
         // TODO: move the button getters to functions in the operator input.
 
         // Set default commands on subsystems
-        drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(drivetrainSubsystem, oi.getDriverController()));
+        drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(oi, drivetrainSubsystem));
         intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(oi, intakeSubsystem));
         shooterSubsystem.setDefaultCommand(new DefaultShooterCommand(shooterSubsystem, oi.getDriverController()));
         climberSubsystem.setDefaultCommand(new DefaultClimberCommand(climberSubsystem, oi.getDriverController()));

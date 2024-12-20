@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.AutoConstants.AutoPattern;
+import frc.robot.Constants.DriverConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.CancelCommand;
 import frc.robot.commands.ShootCommand;
@@ -13,7 +14,6 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-
 /**
  * The Operator input class is used to map buttons to functions and functions to commands
  * <p>
@@ -27,8 +27,7 @@ public class OperatorInput extends SubsystemBase {
     // NOTE: Care is required because the Y axis is normalized (not inverted) in the GameController.
     // XBox buttons are numbered as: A=1, B=2, X=3, Y=4, but use the button getters instead of the
     // raw button numbers
-    // private final GameController driverController = new GameController(OperatorConstants.DRIVER_CONTROLLER_PORT);
-    private final XboxController               driverController   = new XboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
+    private final GameController driverController = new GameController(OperatorConstants.DRIVER_CONTROLLER_PORT);
 
     // Define all Dashboard choosers here...
     private final SendableChooser<AutoPattern> autoPatternChooser = new SendableChooser<>();
@@ -83,6 +82,27 @@ public class OperatorInput extends SubsystemBase {
         return driverController.getBButton();
     }
 
+    /*
+     * Default Drive Command
+     */
+    // The robot is moving if the x-axis doesn't return 0
+    public boolean move() {
+        return driverController.getRawAxis(DriverConstants.AXIS_X) != 0;
+    }
+
+    public boolean rotate() {
+        return driverController.getRawAxis(DriverConstants.AXIS_Y) != 0;
+    }
+    public double getDriveSpeed() {
+        // The getter for the drive speed on X-axis
+        return driverController.getRawAxis(DriverConstants.AXIS_X);
+    }
+
+    public double getRotateSpeed() {
+        // The getter for the rotate speed on Y-axis
+        return driverController.getRawAxis(DriverConstants.AXIS_Y);
+    }
+    
     /**
      * Use this method to define your button->command mappings. for any commands that are not the
      * default command.
