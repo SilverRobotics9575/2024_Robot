@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.AutoConstants.AutoPattern;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.CancelCommand;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -88,7 +88,7 @@ public class OperatorInput extends SubsystemBase {
             .onTrue(new CancelCommand(this, drivetrainSubsystem));
 
         new Trigger(() -> driverJoystick.getRightBumper())
-            .onTrue(new ShooterCommand(shooterSubsystem));
+            .onTrue(new ShootCommand(shooterSubsystem));
 
 
     }

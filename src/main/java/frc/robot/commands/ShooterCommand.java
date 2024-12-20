@@ -4,41 +4,46 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends Command {
     /** Creates a new ShooterCommand */
+    private final XboxController   joystick;
+    // FIXME Hungarian Notation
     private final ShooterSubsystem shooterSubsystem;
 
-    private long                   startTime;
-    private long                   currentTime;
-
     // The commands constructor
-    public ShooterCommand(ShooterSubsystem shooterSubsystem) {
+    public ShooterCommand(ShooterSubsystem shooterSubsystem, XboxController controller) {
+        joystick              = controller;
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
     }
 
-    // Initial code that runs once when the command is called
-    @Override
-    public void initialize() {
-        shooterSubsystem.setTopMotorSpeed(ShooterConstants.MAX_SHOOTER_SPEED);
-        startTime = System.currentTimeMillis();
-    }
-
     // Called every time the scheduler runs while the command is scheduled.
-    // Runs every 20ms
     @Override
     public void execute() {
-        currentTime = System.currentTimeMillis();
-
-        // Check if 0.5 seconds have passed
-        if (currentTime - startTime < 500) {
-            return;
+        // If the 5th button is pressed the shooter will prepare by speeding up the top
+        // motor
+        if (joystick.getRawButton(ShooterConstants.SHOOT_BUTTON1)) {
+            shooterSubsystem.waitSeconds();
+            // If the 5th button is being pressed and the 6th button is clicked then the
+            // shooter
+            // will shoot
         }
-        shooterSubsystem.setBottomMotorSpeed(ShooterConstants.MAX_SHOOTER_SPEED);
+        if (joystick.getRawButton(ShooterConstants.SHOOT_BUTTON1)
+            && joystick.getRawButtonPressed(ShooterConstants.SHOOT_BUTTON2)) {
+            shooterSubsystem.shoot();
+        }
+        // If both buttons are released the shooter will stop
+        if (joystick.getRawButtonReleased(ShooterConstants.SHOOT_BUTTON1)
+            || joystick.getRawButtonReleased(ShooterConstants.SHOOT_BUTTON1)
+                && joystick.getRawButtonReleased(ShooterConstants.SHOOT_BUTTON2)) {
+            shooterSubsystem.stop();
+        }
+
     }
 
     // Called once the command ends or is interrupted.
@@ -50,14 +55,6 @@ public class ShooterCommand extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        currentTime = System.currentTimeMillis();
-
-        if (currentTime - startTime >= 1000) {
-            System.out.println("Shooter command ended.");
-            return true;
-        }
-        else {
-            return false;
-        }
+        return false;
     }
 }
