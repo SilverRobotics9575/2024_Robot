@@ -48,7 +48,7 @@ public class RobotContainer {
         drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(oi, drivetrainSubsystem));
         intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(oi, intakeSubsystem));
         shooterSubsystem.setDefaultCommand(new DefaultShooterCommand(shooterSubsystem, oi.getDriverController()));
-        climberSubsystem.setDefaultCommand(new DefaultClimberCommand(climberSubsystem, oi.getDriverController()));
+        climberSubsystem.setDefaultCommand(new DefaultClimberCommand(oi, climberSubsystem));
 
         // Configure the button bindings
         oi.configureButtonBindings(

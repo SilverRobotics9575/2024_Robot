@@ -75,13 +75,27 @@ public class OperatorInput extends SubsystemBase {
         return driverController.getStartButton();
     }
 
+    /* 
+     * Default Shooter Command
+    // TODO: Button map the default shooter command AFTER the shootCommand is tested
+
+    /*
+     * Default Climber Command
+     */
+    public boolean runClimber() {
+        return driverController.getAButtonPressed();
+    }
+
+    public boolean stopClimber(){
+        return driverController.getAButtonReleased();
+    }
+
     /*
      * Default Intake Command
      */
     public boolean runIntake() {
         return driverController.getBButton();
     }
-
     /*
      * Default Drive Command
      */
@@ -89,7 +103,6 @@ public class OperatorInput extends SubsystemBase {
     public boolean move() {
         return driverController.getRawAxis(DriverConstants.AXIS_X) != 0;
     }
-
     public boolean rotate() {
         return driverController.getRawAxis(DriverConstants.AXIS_Y) != 0;
     }
@@ -97,7 +110,6 @@ public class OperatorInput extends SubsystemBase {
         // The getter for the drive speed on X-axis
         return driverController.getRawAxis(DriverConstants.AXIS_X);
     }
-
     public double getRotateSpeed() {
         // The getter for the rotate speed on Y-axis
         return driverController.getRawAxis(DriverConstants.AXIS_Y);

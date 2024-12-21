@@ -4,20 +4,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.ClimberConstants;
+import frc.robot.operator.OperatorInput;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class DefaultClimberCommand extends Command {
 
-    private final XboxController   joystick;
+    private final OperatorInput   oi;
     private final ClimberSubsystem climberSubsystem;
 
     /** Creates a new ClimberCommand. */
-    public DefaultClimberCommand(ClimberSubsystem climberSubsystem, XboxController controller) {
+    public DefaultClimberCommand(OperatorInput oi, ClimberSubsystem climberSubsystem) {
         addRequirements(climberSubsystem);
-        joystick              = controller;
+        this.oi             = oi;
         this.climberSubsystem = climberSubsystem;
     }
 
@@ -29,15 +28,10 @@ public class DefaultClimberCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        // Climber button climbs while button 3 is being held
-        if (joystick.getRawButton(ClimberConstants.CLIMBER_BUTTON)) {
+        if (oi.runClimber()) {
             climberSubsystem.climb();
-            System.out.println("Climbing"); // Test to see if climbing is working
         }
-        // Climber will stop if the button 3 is released
-        // TODO: Add a way for the robot to automatically know when max climber height
-        // is released
-        if (joystick.getRawButtonReleased(ClimberConstants.CLIMBER_BUTTON)) {
+        if (oi.stopClimber()){
             climberSubsystem.stop();
         }
     }
