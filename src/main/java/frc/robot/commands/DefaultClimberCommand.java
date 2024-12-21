@@ -10,13 +10,14 @@ import frc.robot.subsystems.ClimberSubsystem;
 
 public class DefaultClimberCommand extends Command {
 
-    private final OperatorInput   oi;
+    private final OperatorInput    oi;
     private final ClimberSubsystem climberSubsystem;
 
     /** Creates a new ClimberCommand. */
+    // FIXME: add logging
     public DefaultClimberCommand(OperatorInput oi, ClimberSubsystem climberSubsystem) {
         addRequirements(climberSubsystem);
-        this.oi             = oi;
+        this.oi               = oi;
         this.climberSubsystem = climberSubsystem;
     }
 
@@ -28,10 +29,22 @@ public class DefaultClimberCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+
+        // FIXME: Logic needs to run the climber up and down?
+        // if (climbUp) {
+        // ...set speed up
+        // }
+        // else if (climbDown) {
+        // ...set speed down
+        // }
+        // else {
+        // ...stop
+        // }
+
         if (oi.runClimber()) {
             climberSubsystem.climb();
         }
-        if (oi.stopClimber()){
+        if (oi.stopClimber()) {
             climberSubsystem.stop();
         }
     }

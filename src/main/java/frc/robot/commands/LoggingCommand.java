@@ -39,16 +39,16 @@ public class LoggingCommand extends Command {
     }
 
     /**
-     * Check if the command has been running longer than the passed in timeout.
+     * Check if the command has been running longer than the passed in time.
      * <p>
-     * NOTE: The timeout is checked from the time that the logCommandStart method was called,
+     * NOTE: The elapsed time is checked from the time that the logCommandStart method was called,
      * not from the time that the command was constructed. This method will only work if one
      * of the logCommandStart methods is called in the initialize() method of the command.
      *
      * @param timeout to check, in seconds
      * @return {@code true} if the timeout has been exceeded, {@code false} otherwise
      */
-    public boolean isTimeoutExceeded(double timeout) {
+    public boolean hasElapsed(double timeout) {
         if ((System.currentTimeMillis() - initializeTime) / 1000.0d > timeout) {
             return true;
         }
@@ -73,8 +73,7 @@ public class LoggingCommand extends Command {
     public void logCommandStart(String commandParms) {
 
         this.subsystemList.clear();
-        finishReason   = null;
-        initializeTime = 0;
+        finishReason = null;
 
         this.subsystemList.addAll(getRequirements());
 
