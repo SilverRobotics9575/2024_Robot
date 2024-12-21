@@ -28,12 +28,12 @@ import frc.robot.subsystems.ShooterSubsystem;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    private final OperatorInput       oi               = new OperatorInput();
+    private final OperatorInput       oi                  = new OperatorInput();
 
-    private final DrivetrainSubsystem drivetrainSubsystem       = new DrivetrainSubsystem();
-    private final IntakeSubsystem     intakeSubsystem  = new IntakeSubsystem();
-    private final ShooterSubsystem    shooterSubsystem = new ShooterSubsystem();
-    private final ClimberSubsystem    climberSubsystem = new ClimberSubsystem();
+    private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
+    private final IntakeSubsystem     intakeSubsystem     = new IntakeSubsystem();
+    private final ShooterSubsystem    shooterSubsystem    = new ShooterSubsystem();
+    private final ClimberSubsystem    climberSubsystem    = new ClimberSubsystem();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -47,6 +47,7 @@ public class RobotContainer {
         // Set default commands on subsystems
         drivetrainSubsystem.setDefaultCommand(new DefaultDriveCommand(oi, drivetrainSubsystem));
         intakeSubsystem.setDefaultCommand(new DefaultIntakeCommand(oi, intakeSubsystem));
+        // TODO: Follow the pattern for the DefaultShooterCommand
         shooterSubsystem.setDefaultCommand(new DefaultShooterCommand(shooterSubsystem, oi.getDriverController()));
         climberSubsystem.setDefaultCommand(new DefaultClimberCommand(oi, climberSubsystem));
 

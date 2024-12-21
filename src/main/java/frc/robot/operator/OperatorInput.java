@@ -13,6 +13,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+
 /**
  * The Operator input class is used to map buttons to functions and functions to commands
  * <p>
@@ -26,7 +27,7 @@ public class OperatorInput extends SubsystemBase {
     // NOTE: Care is required because the Y axis is normalized (not inverted) in the GameController.
     // XBox buttons are numbered as: A=1, B=2, X=3, Y=4, but use the button getters instead of the
     // raw button numbers
-    private final GameController driverController = new GameController(OperatorConstants.DRIVER_CONTROLLER_PORT);
+    private final GameController               driverController   = new GameController(OperatorConstants.DRIVER_CONTROLLER_PORT);
 
     // Define all Dashboard choosers here...
     private final SendableChooser<AutoPattern> autoPatternChooser = new SendableChooser<>();
@@ -74,44 +75,63 @@ public class OperatorInput extends SubsystemBase {
         return driverController.getStartButton();
     }
 
-    /* 
-     * Default Shooter Command
-    // TODO: Button map the default shooter command AFTER the shootCommand is tested
-
     /*
+     * Default Shooter Command
+     * // TODO: Button map the default shooter command AFTER the shootCommand is tested
+     *
+     * /*
      * Default Climber Command
      */
     public boolean runClimber() {
         return driverController.getAButtonPressed();
     }
-    public boolean stopClimber(){
+
+    public boolean stopClimber() {
         return driverController.getAButtonReleased();
     }
+
     /*
      * Default Intake Command
      */
     public boolean runIntake() {
         return driverController.getBButton();
     }
+
     /*
      * Default Drive Command
      */
+    // FIXME: Not sure these first two methods are required: move and rotate
+    //
+    // If you wanted to test for zero, you would need to use some kind of
+    // deadbanding because the joysticks never return exactly to zero.
+    // There are a bunch of springs and stuff, and it just doesn't happen to
+    // ever get exactly zero. For deadbanding, you check if the absolute
+    // value is less than a specified minimum. This is done in the GameController
+    // class, so switching to that class happens to allow the code below to work,
+    // but if you were using the XBoxController class, you would need to
+    // do the deadbanding yourself:
+    // return Math.abs(driverController.getRightX()) <
+    // ... OperatorConstants.GAME_CONTROLLER_STICK_DEADBAND;
+
     // The robot is moving if the x-axis doesn't return 0
     public boolean move() {
         return driverController.getRightX() != 0;
     }
+
     public boolean rotate() {
         return driverController.getLeftY() != 0;
     }
+
     public double getDriveSpeed() {
         // The getter for the drive speed on X-axis
         return driverController.getRightX();
     }
+
     public double getRotateSpeed() {
         // The getter for the rotate speed on Y-axis
         return driverController.getLeftY();
     }
-    
+
     /**
      * Use this method to define your button->command mappings. for any commands that are not the
      * default command.

@@ -10,10 +10,11 @@ public class DefaultIntakeCommand extends LoggingCommand {
     private final IntakeSubsystem intakeSubsystem;
 
     public DefaultIntakeCommand(OperatorInput oi, IntakeSubsystem intakeSubsystem) {
-        addRequirements(intakeSubsystem);
+
         this.oi              = oi;
         this.intakeSubsystem = intakeSubsystem;
 
+        addRequirements(intakeSubsystem);
     }
 
     @Override
