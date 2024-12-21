@@ -42,8 +42,6 @@ public final class Constants {
 
         public static final int    CONTROLLER_PORT       = 1;
         public static final double DRIVE_SPEED           = 1.00;
-        public static final int    AXIS_X                = 2;
-        public static final int    AXIS_Y                = 1;
         public static final double RATE_LIMIT            = 0.5;
     }
 
@@ -54,15 +52,12 @@ public final class Constants {
         // 1!
         public static final double MAX_INTAKE_SPEED = 0.3;
         // TODO: Remove this code - all button mappings are hard coded in the OperatorInput class
-        @Deprecated
-        public static final int    INTAKE_BUTTON    = 2;    // PLACEHOLDER VALUE
     }
 
     public static final class ClimberConstants {
         // Input climber constants
         public static final int    RIGHT_CLIMBER_DEVICE_ID = 9;
         public static final int    LEFT_CLIMBER_DEVICE_ID  = 10;
-        public static final int    CLIMBER_BUTTON          = 3;
         public static final double CLIMBER_SPEED           = 0.6; // To be determined
     }
 

@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.AutoConstants.AutoPattern;
-import frc.robot.Constants.DriverConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.CancelCommand;
 import frc.robot.commands.ShootCommand;
@@ -85,11 +84,9 @@ public class OperatorInput extends SubsystemBase {
     public boolean runClimber() {
         return driverController.getAButtonPressed();
     }
-
     public boolean stopClimber(){
         return driverController.getAButtonReleased();
     }
-
     /*
      * Default Intake Command
      */
@@ -101,18 +98,18 @@ public class OperatorInput extends SubsystemBase {
      */
     // The robot is moving if the x-axis doesn't return 0
     public boolean move() {
-        return driverController.getRawAxis(DriverConstants.AXIS_X) != 0;
+        return driverController.getRightX() != 0;
     }
     public boolean rotate() {
-        return driverController.getRawAxis(DriverConstants.AXIS_Y) != 0;
+        return driverController.getLeftY() != 0;
     }
     public double getDriveSpeed() {
         // The getter for the drive speed on X-axis
-        return driverController.getRawAxis(DriverConstants.AXIS_X);
+        return driverController.getRightX();
     }
     public double getRotateSpeed() {
         // The getter for the rotate speed on Y-axis
-        return driverController.getRawAxis(DriverConstants.AXIS_Y);
+        return driverController.getLeftY();
     }
     
     /**
