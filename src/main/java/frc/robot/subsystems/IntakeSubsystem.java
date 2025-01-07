@@ -49,8 +49,11 @@ public class IntakeSubsystem extends SubsystemBase {
         intakeMotor.set(this.intakeSpeed);
     }
 
-    public double getIntakeSpeed() {
-        return intakeSpeed;
+    public double getIntakeSpeed() { // Returns the set speed (the variable in Constants), not the
+                                     // current active speed.
+        return intakeMotor.get();
+        // Rather than just returning the variable in constants, we return it via SparkMax.get(),
+        // which we can use to make sure the speed is properly set outside of constants.
     }
 
     public void stop() {
@@ -67,5 +70,16 @@ public class IntakeSubsystem extends SubsystemBase {
             intakeSpeed = IntakeConstants.MAX_INTAKE_SPEED;
             intakeMotor.set(intakeSpeed);
         }
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getClass().getSimpleName()).append(" : ")
+            .append("Intake Speed ").append(getIntakeSpeed());
+
+        return sb.toString();
     }
 }
