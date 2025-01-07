@@ -82,12 +82,12 @@ public class OperatorInput extends SubsystemBase {
      * /*
      * Default Climber Command
      */
-    public boolean runClimber() {
-        return driverController.getAButtonPressed();
+    public boolean climbUp() {
+        return driverController.getYButtonPressed();
     }
-
+  
     public boolean stopClimber() {
-        return driverController.getAButtonReleased();
+        return driverController.getYButtonReleased();
     }
 
     /*

@@ -30,23 +30,14 @@ public class DefaultClimberCommand extends Command {
     @Override
     public void execute() {
 
-        // FIXME: Logic needs to run the climber up and down?
-        // if (climbUp) {
-        // ...set speed up
-        // }
-        // else if (climbDown) {
-        // ...set speed down
-        // }
-        // else {
-        // ...stop
-        // }
-
-        if (oi.runClimber()) {
+        if (oi.climbUp()) {
             climberSubsystem.climb();
         }
         if (oi.stopClimber()) {
             climberSubsystem.stop();
         }
+        //TODO: The climber command should run up when pressed.
+        // When released it should run down for a defined amount of time and then stop
     }
 
     // Called once the command ends or is interrupted.
