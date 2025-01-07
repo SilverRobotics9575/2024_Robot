@@ -50,11 +50,12 @@ public class Robot extends TimedRobot {
     /** This function is called once each time the robot enters Disabled mode. */
     @Override
     public void disabledInit() {
-
+        // Nothing needed here for disabled iniit
     }
 
     @Override
     public void disabledPeriodic() {
+        // Nothing needed here for disabled periodic 
     }
 
     /**
@@ -63,7 +64,6 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
 
-        // FIXME: Restore this code
         autonomousCommand = robotContainer.getAutonomousCommand();
 
          if (autonomousCommand != null) {
@@ -74,6 +74,7 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
+        // Nothing needed here for periodic mode
     }
 
     @Override
@@ -93,6 +94,7 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
+        // Nothing needed her for teleoperated mode
     }
 
     @Override
@@ -104,15 +106,18 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during test mode. */
     @Override
     public void testPeriodic() {
+        // No testing
     }
 
     /** This function is called once when the robot is first started up. */
     @Override
     public void simulationInit() {
+        // No simulating
     }
 
     /** This function is called periodically whilst in simulation. */
     @Override
     public void simulationPeriodic() {
+        // No simulating
     }
 }
