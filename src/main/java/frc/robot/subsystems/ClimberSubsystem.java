@@ -47,4 +47,24 @@ public class ClimberSubsystem extends SubsystemBase {
         rightClimber.set(0);
         leftClimber.set(0);
     }
+
+    public double getClimberSpeedR() {
+        return rightClimber.get();
+    }
+
+    public double getClimberSpeedL() {
+        return leftClimber.get();
+    }
+    
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getClass().getSimpleName()).append(" : ")
+            .append("Right Climber Speed ").append(getClimberSpeedR())
+            .append("Left Climber Speed ").append(getClimberSpeedL());
+
+        return sb.toString();
+    }
 }

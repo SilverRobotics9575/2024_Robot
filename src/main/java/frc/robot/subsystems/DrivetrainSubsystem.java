@@ -71,4 +71,38 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void stop() {
         differentialDrive.arcadeDrive(0, 0);
     }
+
+    public double getMotorSpeedRF() {
+        return rightFrontMotor.get();
+    }
+
+    public double getMotorSpeedLF() {
+        return leftFrontMotor.get();
+    }
+
+    public double getMotorSpeedRB() {
+        return rightBackMotor.get();
+    }
+
+    public double getMotorSpeedLB() {
+        return leftBackMotor.get();
+    }
+    
+
+    // FIXME: All subsystems need a human readable string that describes the state of the subsystem
+    // which is used for logging
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getClass().getSimpleName()).append(" : ")
+            .append("R Front Motor Speed ").append(getMotorSpeedRF())
+            .append("L Front Motor Speed ").append(getMotorSpeedLF())
+            .append("R Back Motor Speed ").append(getMotorSpeedRB())
+            .append("L Back Motor Speed ").append(getMotorSpeedLB());
+
+        return sb.toString();
+    }
 }
+
