@@ -3,14 +3,18 @@
 // the WPILib BSD license file in the root directory of this project.
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private final CANSparkMax topShooterMotor, bottomShooterMotor;
+    private final SparkMax topShooterMotor, bottomShooterMotor;
 
     public ShooterSubsystem() {
         // FIXME: should these now be shooterMotor and feederMotor
@@ -18,12 +22,8 @@ public class ShooterSubsystem extends SubsystemBase {
         // the constants back to top/bottom as
         // well. Make all the names consistent - it is easier to understand.
         // Pick a name, and stick with it :-)
-        topShooterMotor    = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR_CAN_ID, MotorType.kBrushed);
-        bottomShooterMotor = new CANSparkMax(ShooterConstants.FEEDER_MOTOR_CAN_ID, MotorType.kBrushed);
-
-
-        topShooterMotor.restoreFactoryDefaults();
-        bottomShooterMotor.restoreFactoryDefaults();
+        topShooterMotor    = new SparkMax(ShooterConstants.SHOOTER_MOTOR_CAN_ID, MotorType.kBrushed);
+        bottomShooterMotor = new SparkMax(ShooterConstants.FEEDER_MOTOR_CAN_ID, MotorType.kBrushed);
 
         // FIXME: If you need the shooter and feeder to be inverted, then
         // invert them here - do not put negative signs in the code as
@@ -31,12 +31,13 @@ public class ShooterSubsystem extends SubsystemBase {
         // topShooterMotor.setInverted(true);
         // bottomShooterMotor.setInverted(true);
 
-        // FIXME: Always flash the sparkMax controller once the config values
-        // are set (even if factory defaults). The controller can sometimes
-        // reset due to power fluctuations, and the last "flashed" values
-        // will be used after the SparkMax resets.
-        topShooterMotor.burnFlash();
-        bottomShooterMotor.burnFlash();
+        SparkMaxConfig config = new SparkMaxConfig();
+        config
+            .idleMode(IdleMode.kBrake)
+            .disableFollowerMode();
+
+        topShooterMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        bottomShooterMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     /*

@@ -4,8 +4,12 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,14 +18,19 @@ import frc.robot.Constants.ClimberConstants;
 public class ClimberSubsystem extends SubsystemBase {
     /** Creates a new ClimberSubsystem. */
     // Both motors are different motorcontrollers, so they are delcared seperately
-    private final VictorSP    leftClimber;
-    private final CANSparkMax rightClimber;
+    private final VictorSP leftClimber;
+    private final SparkMax rightClimber;
 
     public ClimberSubsystem() {
         leftClimber  = new VictorSP(ClimberConstants.LEFT_CLIMBER_DEVICE_ID);
-        rightClimber = new CANSparkMax(ClimberConstants.RIGHT_CLIMBER_DEVICE_ID, MotorType.kBrushed);
+        rightClimber = new SparkMax(ClimberConstants.RIGHT_CLIMBER_DEVICE_ID, MotorType.kBrushed);
 
-        rightClimber.restoreFactoryDefaults();
+        SparkMaxConfig config = new SparkMaxConfig();
+        config
+            .idleMode(IdleMode.kBrake)
+            .disableFollowerMode();
+
+        rightClimber.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     public void climb() {

@@ -142,8 +142,8 @@ public class GameController extends XboxController {
         sb.append(getXButton() ? " X" : "");
         sb.append(getYButton() ? " Y" : "");
 
-        sb.append(getLeftBumper() ? " Lb" : "");
-        sb.append(getRightBumper() ? " Rb" : "");
+        sb.append(getLeftBumperButton() ? " Lb" : "");
+        sb.append(getRightBumperButton() ? " Rb" : "");
 
         sb.append(getStartButton() ? " Start" : "");
         sb.append(getBackButton() ? " Back" : "");

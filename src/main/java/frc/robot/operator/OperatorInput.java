@@ -149,7 +149,7 @@ public class OperatorInput extends SubsystemBase {
         new Trigger(() -> isCancel())
             .onTrue(new CancelCommand(this, drivetrainSubsystem, intakeSubsystem, shooterSubsystem, climberSubsystem));
 
-        new Trigger(() -> driverController.getRightBumper())
+        new Trigger(() -> driverController.getRightBumperButton())
             .onTrue(new ShootCommand(shooterSubsystem));
 
 
