@@ -13,11 +13,6 @@ public class DefaultDriveCommand extends LoggingCommand {
     private final OperatorInput       oi;
     private final DrivetrainSubsystem drivetrainSubsystem;
 
-    // The drivetrain variables
-    // FIXME: Not sure to declare them here or in the execute method
-    // FIXME: RESPONSE: In the execute method
-    private double                    moveSpeed   = 0;
-    private double                    rotateSpeed = 0;
 
     // The commands constructor
     public DefaultDriveCommand(OperatorInput oi, DrivetrainSubsystem drivetrainSubsystem) {
@@ -35,37 +30,21 @@ public class DefaultDriveCommand extends LoggingCommand {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-
-        // FIXME: Not sure what we are trying to do here?
-        // The joystick deadbanding will be done in the GameController class, so
-        // we do not need to check for zeros. If anything we want to actually stop the
-        // robot if the driver lets go of the joystick. If there is a zero
-        // value, we want to apply that speed or turn.
-        //
-        // drive = oi.getDriveSpeed
-        // rotate = oi.getRotateSpeed
-        // set the speeds (drive, rotate)
-
-        // Checks if the left joystick is being moved
-        // Sets the moveSpeed to the speed of the left joystick
-        if (oi.move()) {
-            moveSpeed = oi.getDriveSpeed();
-        }
-        // Checks if the right joystick is being moved
-        // Sets the rotateSpeed to the speed of the right joystick
-        if (oi.rotate()) {
-            rotateSpeed = oi.getRotateSpeed();
-        }
+        double                    moveSpeed   = 0;
+        double                    rotateSpeed = 0;
+    
+        moveSpeed = oi.getDriveSpeed();
+        rotateSpeed = oi.getRotateSpeed();
+  
         drivetrainSubsystem.drive(moveSpeed, rotateSpeed);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        // FIXME: Log the state before the command was interrupted.
-        // ie. before stopping.
-        drivetrainSubsystem.stop();
+
         logCommandEnd(interrupted);
+        drivetrainSubsystem.stop();
     }
 
     // Returns true when the command should end.
