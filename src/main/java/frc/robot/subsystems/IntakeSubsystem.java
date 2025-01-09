@@ -21,7 +21,7 @@ public class IntakeSubsystem extends SubsystemBase {
     public IntakeSubsystem() {
 
         intakeMotor = new SparkMax(IntakeConstants.INTAKE_DEVICE_ID, MotorType.kBrushless);
-
+        // The intake motor is still CanSparkMax, so this file should be unchanged.
         SparkMaxConfig config = new SparkMaxConfig();
         config
             .idleMode(IdleMode.kBrake)
@@ -79,7 +79,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
         sb.append(this.getClass().getSimpleName()).append(" : ")
             .append("Intake Speed ").append(getIntakeSpeed());
-
         return sb.toString();
     }
 }

@@ -3,18 +3,13 @@
 // the WPILib BSD license file in the root directory of this project.
 package frc.robot.subsystems;
 
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-    private final SparkMax topShooterMotor, bottomShooterMotor;
+    private final VictorSP topShooterMotor, bottomShooterMotor;
 
     public ShooterSubsystem() {
         // FIXME: should these now be shooterMotor and feederMotor
@@ -22,8 +17,9 @@ public class ShooterSubsystem extends SubsystemBase {
         // the constants back to top/bottom as
         // well. Make all the names consistent - it is easier to understand.
         // Pick a name, and stick with it :-)
-        topShooterMotor    = new SparkMax(ShooterConstants.SHOOTER_MOTOR_CAN_ID, MotorType.kBrushed);
-        bottomShooterMotor = new SparkMax(ShooterConstants.FEEDER_MOTOR_CAN_ID, MotorType.kBrushed);
+        topShooterMotor    = new VictorSP(ShooterConstants.SHOOTER_MOTOR_PWM_ID);
+        bottomShooterMotor = new VictorSP(ShooterConstants.FEEDER_MOTOR_PWM_ID);
+        // VictorSP does not have a WPI version like VictorSPX does.
 
         // FIXME: If you need the shooter and feeder to be inverted, then
         // invert them here - do not put negative signs in the code as
@@ -31,13 +27,6 @@ public class ShooterSubsystem extends SubsystemBase {
         // topShooterMotor.setInverted(true);
         // bottomShooterMotor.setInverted(true);
 
-        SparkMaxConfig config = new SparkMaxConfig();
-        config
-            .idleMode(IdleMode.kBrake)
-            .disableFollowerMode();
-
-        topShooterMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        bottomShooterMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
     /*

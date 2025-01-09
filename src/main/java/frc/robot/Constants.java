@@ -32,7 +32,6 @@ public final class Constants {
     }
 
     public static final class DriverConstants {
-        // TODO Suggestion... RIGHT_FRONT_MOTOR_CAN_ID
         public static final int    RIGHT_FRONT_DEVICE_ID = 1;
         public static final int    LEFT_FRONT_DEVICE_ID  = 3;
         public static final int    RIGHT_BACK_DEVICE_ID  = 2;
@@ -60,8 +59,8 @@ public final class Constants {
 
     public static final class ShooterConstants {
 
-        public static final int    SHOOTER_MOTOR_CAN_ID = 5;
-        public static final int    FEEDER_MOTOR_CAN_ID  = 6;
+        public static final int    SHOOTER_MOTOR_PWM_ID = 5;
+        public static final int    FEEDER_MOTOR_PWM_ID  = 6;
         public static final double WAIT_TIME            = 1;
         // FIXME: Move these buttons
         public static final int    SHOOT_BUTTON1        = 5;
