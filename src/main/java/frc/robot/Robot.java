@@ -107,8 +107,8 @@ public class Robot extends TimedRobot {
         System.out.println("Robot Raw Gyro Y: " + navx.getRawGyroY());
         System.out.println("Robot Raw Gyro Z: " + navx.getRawGyroZ());
         System.out.println("Robot Raw Acceleration X: " + navx.getRawAccelX());
-        System.out.println("Robot Raw Acceleration Y: " + navx.getRawAccelX());
-        System.out.println("Robot Raw Acceleration Z: " + navx.getRawAccelX());
+        System.out.println("Robot Raw Acceleration Y: " + navx.getRawAccelY());
+        System.out.println("Robot Raw Acceleration Z: " + navx.getRawAccelZ());
     }
 
     @Override
