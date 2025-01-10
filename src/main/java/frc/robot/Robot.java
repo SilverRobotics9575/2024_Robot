@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.studica.frc.AHRS;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.subsystems.DrivetrainSubsystem;
@@ -17,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
     // private DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+    private AHRS           navx = new AHRS(AHRS.NavXComType.kMXP_SPI);
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -97,6 +100,15 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
+        // Navx2 data being printed to terminal
+        System.out.println("Robot Angle: " + navx.getAngle());
+        System.out.println("Robot Compass Heading: " + navx.getCompassHeading());
+        System.out.println("Robot Raw Gyro X: " + navx.getRawGyroX());
+        System.out.println("Robot Raw Gyro Y: " + navx.getRawGyroY());
+        System.out.println("Robot Raw Gyro Z: " + navx.getRawGyroZ());
+        System.out.println("Robot Raw Acceleration X: " + navx.getRawAccelX());
+        System.out.println("Robot Raw Acceleration Y: " + navx.getRawAccelX());
+        System.out.println("Robot Raw Acceleration Z: " + navx.getRawAccelX());
     }
 
     @Override
