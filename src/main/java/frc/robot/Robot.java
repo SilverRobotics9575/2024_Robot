@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        robotContainer.getLEDSubsystem().setColor(0, 255, 0);
+        robotContainer.getLEDSubsystem();
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
