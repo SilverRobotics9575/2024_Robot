@@ -88,6 +88,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        robotContainer.getLEDSubsystem().setColor(0, 255, 0);
 
         // FIXME: restore this code
 
@@ -108,7 +109,7 @@ public class Robot extends TimedRobot {
         // The if statements are here so you can control what gets outputted that way it won't flood
         // the terminal with unneeded data
         // Navx2 data being printed to terminal
-        if (true) {
+        if (false) {
             System.out.println("Robot Angle: " + navx.getAngle());
             System.out.println("Robot Compass Heading: " + navx.getCompassHeading());
             System.out.println("Robot Raw Gyro X: " + navx.getRawGyroX());
@@ -120,7 +121,7 @@ public class Robot extends TimedRobot {
         }
 
         // Prints whether or not the proximity sensor is detecting something
-        if (true) {
+        if (false) {
             boolean isObjectDetected = proximitySensor.get();
 
             if (isObjectDetected) {
