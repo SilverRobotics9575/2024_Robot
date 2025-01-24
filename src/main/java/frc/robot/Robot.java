@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.studica.frc.AHRS;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -16,8 +19,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
+    // private DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+    private AHRS           navx = new AHRS(AHRS.NavXComType.kMXP_SPI);
+    private DigitalInput   proximitySensor;
     private Command autonomousCommand;
-    //private DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -28,6 +33,9 @@ public class Robot extends TimedRobot {
         // Instantiate our RobotContainer. This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
+
+        // initialize proximity sensor on DIO 9
+        proximitySensor = new DigitalInput(9);
     }
 
     /**
@@ -79,6 +87,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        robotContainer.getLEDSubsystem().setColor(0, 255, 0);
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -94,7 +103,31 @@ public class Robot extends TimedRobot {
     /** This function is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
-        // Nothing needed her for teleoperated mode
+        // The if statements are here so you can control what gets outputted that way it won't flood
+        // the terminal with unneeded data
+        // Navx2 data being printed to terminal
+        if (false) {
+            System.out.println("Robot Angle: " + navx.getAngle());
+            System.out.println("Robot Compass Heading: " + navx.getCompassHeading());
+            System.out.println("Robot Raw Gyro X: " + navx.getRawGyroX());
+            System.out.println("Robot Raw Gyro Y: " + navx.getRawGyroY());
+            System.out.println("Robot Raw Gyro Z: " + navx.getRawGyroZ());
+            System.out.println("Robot Raw Acceleration X: " + navx.getRawAccelX());
+            System.out.println("Robot Raw Acceleration Y: " + navx.getRawAccelY());
+            System.out.println("Robot Raw Acceleration Z: " + navx.getRawAccelZ());
+        }
+
+        // Prints whether or not the proximity sensor is detecting something
+        if (false) {
+            boolean isObjectDetected = proximitySensor.get();
+
+            if (isObjectDetected) {
+                System.out.println("Object Detected.");
+            }
+            else {
+                System.out.println("No Object Detected.");
+            }
+        }
     }
 
     @Override

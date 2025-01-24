@@ -14,6 +14,7 @@ import frc.robot.operator.OperatorInput;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 /**
@@ -34,6 +35,7 @@ public class RobotContainer {
     private final IntakeSubsystem     intakeSubsystem     = new IntakeSubsystem();
     private final ShooterSubsystem    shooterSubsystem    = new ShooterSubsystem();
     private final ClimberSubsystem    climberSubsystem    = new ClimberSubsystem();
+    private final LEDSubsystem        ledSubsystem        = new LEDSubsystem();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -67,5 +69,9 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         return new AutonomousCommand(oi,
             drivetrainSubsystem, intakeSubsystem, shooterSubsystem, climberSubsystem);
+    }
+
+    public LEDSubsystem getLEDSubsystem() {
+        return ledSubsystem;
     }
 }

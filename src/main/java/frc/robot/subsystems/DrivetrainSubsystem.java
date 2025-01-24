@@ -4,12 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,43 +14,24 @@ import frc.robot.Constants.DriverConstants;
 public class DrivetrainSubsystem extends SubsystemBase {
     /** Creates a new DrivetrainSubsystem. */
 
-    private final SparkMax    rightFrontMotor, rightBackMotor, leftFrontMotor, leftBackMotor;
+    private final WPI_VictorSPX rightFrontMotor, rightBackMotor, leftFrontMotor;
+    private final WPI_TalonSRX  leftBackMotor;
+    // The WPI_ version of the motor controllers provides DifferentialDrive and other necessities
 
-    private DifferentialDrive differentialDrive = null;
+    private DifferentialDrive   differentialDrive = null;
 
     public DrivetrainSubsystem() {
 
-        rightFrontMotor = new SparkMax(DriverConstants.RIGHT_FRONT_DEVICE_ID, MotorType.kBrushed);
-        rightBackMotor  = new SparkMax(DriverConstants.RIGHT_BACK_DEVICE_ID, MotorType.kBrushed);
-        leftFrontMotor  = new SparkMax(DriverConstants.LEFT_FRONT_DEVICE_ID, MotorType.kBrushed);
-        leftBackMotor   = new SparkMax(DriverConstants.LEFT_BACK_DEVICE_ID, MotorType.kBrushed);
+        rightFrontMotor = new WPI_VictorSPX(DriverConstants.RIGHT_FRONT_DEVICE_ID);
+        rightBackMotor  = new WPI_VictorSPX(DriverConstants.RIGHT_BACK_DEVICE_ID);
+        leftFrontMotor  = new WPI_VictorSPX(DriverConstants.LEFT_FRONT_DEVICE_ID);
+        leftBackMotor   = new WPI_TalonSRX(DriverConstants.LEFT_BACK_DEVICE_ID);
+        // Motor 4 is a TalonSRX, but everything else is VictorSPX>
 
-        SparkMaxConfig config = new SparkMaxConfig();
-        config
-            .idleMode(IdleMode.kBrake)
-            .disableFollowerMode();
-
-        rightFrontMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-        // Configure the backMotor to follow the front with the same config
-        config.follow(rightFrontMotor);
-        rightBackMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-
-        config = new SparkMaxConfig();
-        config
-            .idleMode(IdleMode.kBrake)
-            .disableFollowerMode();
-
-        leftFrontMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-        // Configure the rightBackMotor to follow the front with the same config
-        config.follow(leftFrontMotor);
-        leftBackMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-
-
+        rightBackMotor.follow(rightFrontMotor);
+        leftBackMotor.follow(leftFrontMotor);
         differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+
     }
 
     public void drive(double moveSpeed, double rotateSpeed) {
