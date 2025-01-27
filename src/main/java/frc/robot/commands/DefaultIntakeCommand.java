@@ -6,12 +6,12 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class DefaultIntakeCommand extends LoggingCommand {
 
-    private final OperatorInput   oi;
+    private final OperatorInput oi;
     private final IntakeSubsystem intakeSubsystem;
 
     public DefaultIntakeCommand(OperatorInput oi, IntakeSubsystem intakeSubsystem) {
 
-        this.oi              = oi;
+        this.oi = oi;
         this.intakeSubsystem = intakeSubsystem;
 
         addRequirements(intakeSubsystem);
@@ -25,11 +25,10 @@ public class DefaultIntakeCommand extends LoggingCommand {
     @Override
     public void execute() {
 
-        // If the button specified in the constants is pressed, begin the intake motor.
+        // If B button pressed, begin the intake motor.
         if (oi.runIntake()) {
             intakeSubsystem.setIntakeSpeed(IntakeConstants.INTAKE_SPEED);
-        }
-        else {
+        } else {
             intakeSubsystem.stop();
         }
     }
